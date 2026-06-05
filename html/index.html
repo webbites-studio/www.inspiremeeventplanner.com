@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inspire Me Event Planner</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#111111;
+color:#f3eee6;
+font-family:'Inter',sans-serif;
+overflow-x:hidden;
+line-height:1.7;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+img{
+width:100%;
+display:block;
+}
+
+.container{
+width:90%;
+max-width:1500px;
+margin:0 auto;
+}
+
+header{
+position:fixed;
+width:100%;
+top:0;
+left:0;
+z-index:999;
+background:rgba(17,17,17,0.75);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:28px 0;
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:2.1rem;
+font-weight:500;
+letter-spacing:0.08em;
+color:#f3eee6;
+}
+
+.nav-links{
+display:flex;
+gap:42px;
+text-transform:uppercase;
+font-size:0.68rem;
+letter-spacing:0.38em;
+color:#d5c4ad;
+}
+
+.nav-links a{
+transition:opacity .3s ease;
+}
+
+.nav-links a:hover{
+opacity:.6;
+}
+
+.hero{
+height:100vh;
+display:flex;
+align-items:flex-start;
+padding:140px 0 110px;
+background-image:linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.72)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2200&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to top, rgba(17,17,17,1), rgba(17,17,17,0));
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:980px;
+}
+
+.eyebrow{
+text-transform:uppercase;
+letter-spacing:.42em;
+font-size:.7rem;
+margin-bottom:26px;
+color:#d4b891;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(4rem,9vw,8.5rem);
+line-height:.88;
+font-weight:400;
+letter-spacing:-.04em;
+margin-bottom:32px;
+}
+
+.hero p{
+max-width:620px;
+font-size:1.05rem;
+color:#e0d7cb;
+margin-bottom:44px;
+}
+
+.hero-buttons{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 34px;
+border:1px solid rgba(255,255,255,.16);
+text-transform:uppercase;
+letter-spacing:.3em;
+font-size:.68rem;
+color:#f4eee5;
+transition:all .35s ease;
+}
+
+.btn:hover{
+background:#f4eee5;
+color:#111;
+}
+
+section{
+padding:140px 0;
+}
+
+.section-label{
+text-transform:uppercase;
+letter-spacing:.42em;
+font-size:.68rem;
+margin-bottom:24px;
+color:#a58f73;
+}
+
+.section-title{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(3rem,6vw,6rem);
+line-height:.92;
+font-weight:400;
+margin-bottom:50px;
+max-width:900px;
+}
+
+.manifesto{
+background:#151515;
+}
+
+.manifesto-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+align-items:center;
+}
+
+.manifesto-image{
+height:760px;
+background-image:url('https://scontent-iad6-1.xx.fbcdn.net/v/t39.30808-6/709122210_986149470837084_7460652739068811390_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=n900mV4BXcUQ7kNvwFvzgcK&_nc_oc=AdqUVR3FxHlBk5IqkLzk5CpmFS3_YfjDX_-ueZgqfTy2uiXNEelgZ1XTR4is6edCKsU&_nc_zt=23&_nc_ht=scontent-iad6-1.xx&_nc_gid=xkC3zep8rFSahXZaPZZ-_A&_nc_ss=7b2a8&oh=00_Af8RXcmkD1cQwwAMmuT8Q5fp7jl_cUKGxO26HBvC1a8i4w&oe=6A214D4C');
+background-size:cover;
+background-position:center;
+}
+
+.manifesto-text p{
+max-width:620px;
+color:#d3cbc0;
+font-size:1rem;
+}
+
+.services{
+background:#f3eee6;
+color:#111;
+}
+
+.services .section-label{
+color:#8e6e49;
+}
+
+.services-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:28px;
+}
+
+.service-card{
+padding:52px;
+background:#f8f4ef;
+border:1px solid rgba(0,0,0,.06);
+min-height:340px;
+transition:transform .35s ease;
+}
+
+.service-card:hover{
+transform:translateY(-6px);
+}
+
+.service-number{
+font-size:.68rem;
+letter-spacing:.32em;
+text-transform:uppercase;
+margin-bottom:26px;
+color:#9a7d5f;
+}
+
+.service-card h3{
+font-family:'Cormorant Garamond',serif;
+font-size:2.1rem;
+font-weight:500;
+margin-bottom:20px;
+}
+
+.service-card p,
+.service-card li{
+color:#5d5851;
+}
+
+.service-card p.list-heading{
+margin-top:28px;
+margin-bottom:16px;
+}
+
+.gallery{
+background:#111;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(12,1fr);
+gap:18px;
+}
+
+.gallery-item{
+overflow:hidden;
+position:relative;
+}
+
+.gallery-item img{
+height:100%;
+object-fit:cover;
+transition:transform .8s ease;
+}
+
+.gallery-item:hover img{
+transform:scale(1.04);
+}
+
+.large{
+grid-column:span 8;
+height:760px;
+}
+
+.small{
+grid-column:span 4;
+height:760px;
+}
+
+.testimonials{
+background:#181818;
+}
+
+.testimonials-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:32px;
+}
+
+.testimonial-card{
+padding:56px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+min-height:320px;
+position:relative;
+}
+
+.testimonial-card::before{
+content:'“';
+position:absolute;
+top:24px;
+left:24px;
+font-size:5rem;
+color:rgba(255,255,255,.08);
+font-family:'Cormorant Garamond',serif;
+}
+
+.testimonial-card p{
+font-size:1.05rem;
+line-height:1.9;
+color:#e3dbd0;
+margin-bottom:28px;
+position:relative;
+}
+
+.testimonial-author{
+font-weight:600;
+font-family:'Cormorant Garamond',serif;
+font-size:1.1rem;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#f3eee6;
+}
+
+.testimonials .section-label{
+color:#d4b891;
+}
+
+@media(max-width:1024px){
+
+.testimonials-grid{
+grid-template-columns:1fr;
+}
+
+.large,
+.small{
+grid-column:span 12;
+height:500px;
+}
+
+.manifesto-image{
+height:500px;
+}
+
+}
+
+.quote-section{
+text-align:center;
+padding:180px 0;
+background:#181818;
+}
+
+.quote-section h2{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(3rem,6vw,6rem);
+font-weight:400;
+line-height:1;
+max-width:1100px;
+margin:0 auto 34px;
+}
+
+.quote-section p{
+text-transform:uppercase;
+letter-spacing:.35em;
+font-size:.7rem;
+color:#b89d7c;
+}
+
+.contact{
+background:#f3eee6;
+color:#111;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:90px;
+}
+
+.contact p{
+max-width:520px;
+color:#58544f;
+margin-bottom:28px;
+}
+
+.social-links{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+margin-top:22px;
+}
+
+.social-links a{
+color:#111;
+background:#f3eee6;
+padding:12px 18px;
+border-radius:999px;
+font-size:.82rem;
+letter-spacing:.18em;
+text-transform:uppercase;
+transition:opacity .3s ease, transform .3s ease;
+}
+
+.social-links a:hover{
+opacity:.8;
+transform:translateY(-2px);
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+input,
+textarea{
+background:transparent;
+border:none;
+border-bottom:1px solid rgba(0,0,0,.12);
+padding:18px 0;
+font-size:.95rem;
+font-family:inherit;
+outline:none;
+}
+
+textarea{
+resize:vertical;
+min-height:150px;
+}
+
+button{
+width:fit-content;
+padding:16px 36px;
+background:#111;
+color:#f3eee6;
+border:none;
+text-transform:uppercase;
+letter-spacing:.32em;
+font-size:.68rem;
+cursor:pointer;
+transition:opacity .3s ease;
+}
+
+button:hover{
+opacity:.85;
+}
+
+footer{
+padding:50px 0;
+background:#111;
+border-top:1px solid rgba(255,255,255,.05);
+}
+
+.footer-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+text-transform:uppercase;
+letter-spacing:.32em;
+font-size:.65rem;
+color:#c7b39a;
+}
+
+@media(max-width:1024px){
+
+.manifesto-grid,
+.services-grid,
+.contact-grid{
+grid-template-columns:1fr;
+}
+
+.large,
+.small{
+grid-column:span 12;
+height:500px;
+}
+
+.manifesto-image{
+height:500px;
+}
+
+}
+
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:18px;
+}
+
+.nav-links{
+gap:16px;
+font-size:.58rem;
+}
+
+.hero h1{
+font-size:4rem;
+}
+
+section{
+padding:100px 0;
+}
+
+.service-card{
+padding:38px;
+}
+
+.footer-content{
+flex-direction:column;
+gap:16px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<nav>
+<div class="logo">Inspire Me Event Planner</div>
+
+<div class="nav-links">
+<a href="#home">Home</a>
+<a href="#manifesto">Manifesto</a>
+<a href="#services">Services</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+</div>
+</header>
+
+<section class="hero" id="home">
+<div class="container">
+<div class="hero-content">
+
+<div class="eyebrow">Luxury Wedding Planning & Event Production</div>
+
+<h1>Fierce precision.<br>Absolute grace.</h1>
+
+<p>
+Inspire Me Event Planner creates immersive, globally inspired celebrations for discerning clients who expect extraordinary execution, cinematic atmosphere, and seamless elegance.
+</p>
+
+<div class="hero-buttons">
+<a href="#contact" class="btn">Begin Your Experience</a>
+<a href="#portfolio" class="btn">Explore Portfolio</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="manifesto" id="manifesto">
+<div class="container">
+
+<div class="manifesto-grid">
+
+<div class="manifesto-text">
+
+<div class="section-label">The Inspire Me Event Planner Manifesto</div>
+
+<h2 class="section-title">
+Guarding the beauty of the moment.
+</h2>
+
+<p>
+Inspired by the ancient symbol of absolute grace and unyielding protection, Inspire Me Event Planner believes the grandest celebrations require flawless structure beneath every detail.
+    <br><br>
+Founded by Natalia Markelova, whose background blends refined event production, operational precision, and an instinct for elegant storytelling, the company was created to deliver celebrations that feel effortless, immersive, and deeply personal.
+    <br><br>
+From transforming historic estates into immersive worlds to orchestrating fluid guest experiences across multi-day celebrations, every movement is intentional, refined, and executed without compromise.
+</p>
+
+</div>
+
+<div class="manifesto-image"></div>
+
+</div>
+
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="container">
+
+<div class="section-label">Services</div>
+
+<h2 class="section-title">
+Narrative-driven events designed with absolute control.
+</h2>
+
+<div class="services-grid">
+
+<div class="service-card">
+<div class="service-number">01</div>
+<h3>Luxury Wedding Planning</h3>
+<p>
+At Inspire Me Event Planner, we specialize in turning your wedding dreams into reality. Our expert team is dedicated to crafting personalized and unforgettable experiences, handling every detail from venue selection to the final send-off. We offer a range of services including budget management, vendor coordination, and day-of logistics, ensuring that your celebration is seamless and stress-free. Let us inspire and guide you through the planning process, making your special day everything you've envisioned and more.
+</p>
+<p class="list-heading">What is included into wedding planning:</p>
+<ol>
+ <li>Initial Consultation and Vision Setting: We start by discussing your vision, preferences, and overall style. This early stage helps us understand your goals and begin forming a cohesive plan.</li>
+ <li>Budget and Timeline Development: We establish a comprehensive budget and create a detailed timeline, breaking down tasks and deadlines to ensure nothing is overlooked.</li>
+ <li>Venue Selection and Booking: With ample time, we research and tour potential venues, securing the perfect location for your ceremony and reception well in advance.</li>
+ <li>Vendor Research and Contracts: We help you select and book reputable vendors, including caterers, photographers, and florists, ensuring they align with your vision and budget.</li>
+ <li>Design and Décor Planning: Early planning allows us to explore design options, from color schemes to décor elements, ensuring a cohesive and personalized aesthetic.</li>
+ <li>Guest List and Invitations: We assist in compiling your guest list, designing, and sending save-the-date cards and invitations, giving your guests ample time to RSVP.</li>
+ <li>Attire and Fittings: With a year to work with, we schedule fittings and purchase wedding attire, allowing for alterations and adjustments as needed.</li>
+ <li>Ongoing Coordination: Regular check-ins and updates ensure everything remains on track and adjustments are made as needed.</li>
+</ol>
+</div>
+
+<div class="service-card">
+<div class="service-number">02</div>
+<h3>Wedding Design Services</h3>
+<p>
+At Inspire Me Event Planner we offer comprehensive wedding design services tailored to bring your vision to life. Our team specializes in creating stunning, personalized designs that reflect your unique style and preferences. From elegant floral arrangements and sophisticated table settings to bespoke décor and lighting solutions, we ensure every detail is meticulously planned and executed. We work closely with you to understand your dreams and transform them into a beautiful reality, making your special day unforgettable. Let us handle the design so you can focus on enjoying your celebration.</p>
+</div>
+
+<div class="service-card">
+<div class="service-number">03</div>
+<h3>Wedding Coordination</h3>
+<p>
+Our Day-of Coordination service is designed to provide peace of mind, allowing you to enjoy every moment of your wedding day without stress. We’ll handle the logistics, so you can focus on what truly matters—celebrating your with family and friends.
+Please feel free to reach out with any questions or to discuss how we can tailor our services to meet your specific needs.
+</p>
+<p class="list-heading">Pre-Wedding Preparations:</p>
+<ol>
+ <li>Final call: We will have a call with you a few weeks before your wedding to review all the details of your day. During this call, we’ll confirm the timeline, vendor contacts, and any last-minute changes, ensuring that everyone is on the same page.
+ <li>Detailed Timeline: We will finalize a comprehensive timeline for your wedding day, covering everything from vendor arrivals to the last. This timeline will be distributed to all key participants, ensuring smooth coordination.
+ <li>Vendor Coordination: In the days leading up to your wedding, we will connect with all your vendors to confirm their roles, arrival times ⌚️, and any specific requests you have. This ensures everyone is aligned and ready for the big day.
+ <li>Day-Of Coordination
+ <li>Vendor Management: On your wedding day, we will be the first point of contact for all vendors. We’ll oversee their arrivals, ensure that setups are done according to your specifications, and handle any issues that may arise.
+ <li>Setup Supervision: We will ensure that all decor, seating arrangements, floral arrangements, and other details are set up exactly as planned. Whether it’s arranging place cards or ensuring that the cake is perfectly positioned, we’ll take care of it.
+ <li>Ceremony Coordination: We will manage the flow of the ceremony, from ensuring that the wedding party is lined up in the correct order to cueing the music and orchestrating the processional. Our goal is to ensure that your ceremony proceeds beautifully and on time.
+ <li>Reception Management: As the reception begins, we will oversee the transition of events, ensuring that everything happens according to your timeline. This includes managing key moments like the grand entrance, first dance, toasts, cake cutting, and more.
+ <li>Guest Assistance: I will be on hand to assist your guests with any needs they may have, whether it’s finding their seats, coordinating transportation, or accommodating special requests.
+ <li>Problem Solving: We are your behind-the-scenes troubleshooters. If any unexpected issues arise, we will handle them discreetly and efficiently, allowing you and your guests to enjoy the day without interruption.
+ <li>End-of-Night Wrap-Up
+ <li>Vendor Payments: We can distribute any remaining vendor payments and gratuities on your behalf, ensuring that all financial aspects are taken care of.
+ <li>Collection of Personal Items: We will gather all personal items, gifts, and leftover decor at the end of the night, ensuring they are packed up safely and delivered to the appropriate person or location.
+ <li>Venue Coordination: We will oversee the breakdown and cleanup, ensuring that the venue is left in good condition and that all rental items are returned as per your agreements.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="gallery" id="portfolio">
+<div class="container">
+
+<div class="section-label">Portfolio</div>
+
+<h2 class="section-title">
+Transforming spaces into unforgettable worlds.
+</h2>
+
+<div class="gallery-item small">
+<img src="https://cdn.myportfolio.com/7db19bc99e9973a451dd464a50d88a28/3c2656c4-21c1-45c0-9a4c-589ea93768ad_rw_3840.JPG?h=eb5b9a93cae5a9de00885978e9e4d3a4" alt="Elegant wedding details">
+</div>
+
+<div class="gallery-item small">
+<img src="https://cdn.myportfolio.com/7db19bc99e9973a451dd464a50d88a28/8c0bc33d-a7b0-4946-b4f3-af422bbc90cd_rw_1920.jpg?h=a158d3667fb1fa9e2a668deed621a074" alt="Elegant wedding details">
+</div>
+
+<div class="gallery-item small">
+<img src="https://cdn.myportfolio.com/7db19bc99e9973a451dd464a50d88a28/9cc6caa3-c3f2-4962-b4e7-56e43864f151_rw_3840.JPG?h=584274c906e677a4ddf00622f54d1e21">
+</div>
+
+<div class="gallery-item small">
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1400&auto=format&fit=crop" alt="Luxury tablescape">
+</div>
+
+<div class="gallery-item small">
+<img src="https://cdn.myportfolio.com/7db19bc99e9973a451dd464a50d88a28/91919eff-5eeb-4cc6-a1d7-d7e62f9a10ea_rw_3840.jpg?h=1547dd9798a0e9dd9c6158588a1a9983" alt="Luxury tablescape">
+</div>
+
+<div class="gallery-item large">
+<img src="https://cdn.myportfolio.com/7db19bc99e9973a451dd464a50d88a28/7cb40125-b082-4deb-92ea-791502aba584_rw_3840.JPG?h=44d926a1fd743d052bed002e666b2ecd">
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="testimonials" id="testimonials">
+<div class="container">
+
+<div class="section-label">Testimonials</div>
+
+<h2 class="section-title">
+Clients who trust every detail.
+</h2>
+
+<div class="testimonials-grid">
+
+<div class="testimonial-card">
+<p>
+"Natalia’s team brought our celebration to life with impeccable precision. Every vendor, every timing detail, and every moment was executed so beautifully that we felt totally present the whole day."
+</p>
+<div class="testimonial-author">— Emma & Jason, Newport Wedding</div>
+</div>
+
+<div class="testimonial-card">
+<p>
+"From the first consultation to the final send-off, Inspire Me Event Planner made every step effortless. Their design sense and event coordination made our wedding feel polished, luxurious, and deeply personal."
+</p>
+<div class="testimonial-author">— Mia & Oliver, Destination Celebration</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="quote-section">
+<div class="container">
+<h2>
+The art of effortless protection.
+</h2>
+<p>
+Inspire Me Event Planner — Wedding Planning & Luxury Event Production
+</p>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+
+<div class="contact-grid">
+
+<div>
+
+<div class="section-label">Contact</div>
+
+<h2 class="section-title">
+Begin the conversation.
+</h2>
+
+<p>
+We take on a limited number of celebrations each year to ensure every client receives complete creative attention and a deeply personalized experience.
+</p>
+
+<p>
+Inquiries — inspiremeeventplanner@gmail.com
+<br>
+New England • Worldwide Destinations
+</p>
+
+<div class="social-links">
+<a href="https://www.instagram.com/inspiremephotographyevents?fbclid=IwY2xjawSIWP9leHRuA2FlbQIxMABicmlkETFMczFOam02Z1R2M05JSEd6c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvVzzijTLycSk5P8vNSuDY1Ry4DQp-xod6JQiKvDL38RtDo0bOXIBxGOcAD1_aem_5YecZAdyMhF-h5eEJW7jxg" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a href="https://www.facebook.com/profile.php?id=100083261191488" target="_blank" rel="noopener noreferrer">Facebook</a>
+</div>
+
+</div>
+
+<form>
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email Address" required>
+<input type="text" placeholder="Prospect Wedding Date">
+<input type="text" placeholder="Wedding Location">
+<input type="text" placeholder="Estimated Guest Count">
+<textarea placeholder="Tell us about your celebration"></textarea>
+<button type="submit">Submit Inquiry</button>
+</form>
+
+</div>
+
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="footer-content">
+<div>Inspire Me Event Planner</div>
+<div>Sleek silhouettes. Impeccable execution.</div>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
